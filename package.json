@@ -1,0 +1,31 @@
+{
+  "name": "js-battleship",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/preset-env": "^7.8.4",
+    "babel": "^6.23.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "jest": "^25.1.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "dev": "webpack-dev-server --open",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webmarkyn/js-battleship.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webmarkyn/js-battleship/issues"
+  },
+  "homepage": "https://github.com/webmarkyn/js-battleship#readme"
+}
