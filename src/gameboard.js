@@ -8,7 +8,7 @@ export default class Gameboard {
   // call ship methods on the board cell,
   // were the ship is placed, it gets called directly on class instance
   placeShip(ship, x, y) {
-    if (this.board[y][x] !== undefined) return false
+    if (this.board[y][x] !== undefined || this.ships.includes(ship)) return false
     this.ships.push(ship)
     for (let i = 0; i < ship.length; i++) {
       this.board[y][x + i] = ship;
@@ -34,6 +34,7 @@ export default class Gameboard {
   }
 
   allSunk() {
-    return this.ships.every(ship => ship.damaged.every(e => e === true))
+    if (this.ships.length === 0) return false
+    return this.ships.every(ship => ship.isSunk())
   }
 }
