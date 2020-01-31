@@ -1,19 +1,21 @@
 export default class Ship {
-    constructor(len) {
-        this._length = len
-        this.damaged = new Array(len).fill(false)
-        this.sunk = false
-    }
+  constructor(len) {
+    this._length = len;
+    this.damaged = new Array(len).fill(false);
+  }
 
-    hit(index) {
-        this.damaged[index] = true
-    }
+  // Changes the damaged state of ship's cell to true
+  hit(index) {
+    this.damaged[index] = true;
+  }
 
-    isSunk() {
-        return this.damaged.every((el) => true)
-    }
+  // will return true if all ship's cells are damaged
+  isSunk() {
+    return this.damaged.every(el => true);
+  }
 
-    get length() {
-        return this._length
-    }
+  // Returns the length of the ship
+  get length() {
+    return this._length;
+  }
 }
