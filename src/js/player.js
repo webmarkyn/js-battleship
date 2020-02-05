@@ -19,7 +19,7 @@ export default class Player {
     ];
   }
 
-  removeShips(id) {
+  removeShip(id) {
     this.freeShips.splice(id, 1)
   }
 }
