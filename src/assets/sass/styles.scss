@@ -30,6 +30,7 @@ body {
         border-radius: 3px;
         background: linear-gradient(45deg,rgba(#fff, 0.2), rgba(#000, 0),
                 rgba(#fff, 0.2), rgba(#000, 0), rgba(#fff, 0.2));
+        flex-wrap: wrap;
 
         .board {
             width: 48%;
@@ -90,6 +91,32 @@ body {
 
         .enemy-board {
             @extend .board
+        }
+
+        .controls {
+            color: #fff;
+            width: 100%;
+            padding: 30px 50px;
+
+            input {
+                margin-right: 5px;
+            }
+
+            label {
+                margin-right: 15px;
+            }
+
+            button {
+                background: transparent;
+                color: #fff;
+                padding: 10px;
+                border: solid 1px #fff;
+                border-radius: 3px;
+
+                &:hover {
+                    background: rgba(#fff, 0.1);
+                }
+            }
         }
     }
 }

@@ -51,6 +51,39 @@ const grid = () => {
     return container;
 };
 
+const renderControls = () => {
+    const container = document.createElement('div');
+    const orientationVertical = document.createElement('input');
+    const orientationHorizontal = document.createElement('input');
+    const labelVertical = document.createElement('label');
+    const labelHorizontal = document.createElement('label');
+    const ready = document.createElement('button');
+
+    container.classList.add('controls');
+
+    orientationVertical.setAttribute('type', 'radio');
+    orientationVertical.id = 'orientationVertical';
+    orientationVertical.name = 'orientation';
+    orientationVertical.checked = true;
+    labelVertical.setAttribute('for', 'orientationVertical');
+    labelVertical.innerText = 'vertical';
+
+    orientationHorizontal.setAttribute('type', 'radio');
+    orientationHorizontal.id = 'orientationHorizontal';
+    orientationHorizontal.name = 'orientation';
+    labelHorizontal.setAttribute('for', 'orientationHorizontal');
+    labelHorizontal.innerText = 'Horizontal';
+
+    ready.innerText = 'Start Game';
+
+    container.appendChild(orientationVertical);
+    container.appendChild(labelVertical);
+    container.appendChild(orientationHorizontal);
+    container.appendChild(labelHorizontal);
+    container.appendChild(ready);
+    containerAppend(container);
+};
+
 const renderSelfBoard = () => {
     const selfBoard = document.createElement('div');
     const title = document.createElement('h2');
@@ -83,5 +116,6 @@ const renderEnemyBoard = () => {
 
 export {
     renderSelfBoard,
-    renderEnemyBoard
+    renderEnemyBoard,
+    renderControls
 }
