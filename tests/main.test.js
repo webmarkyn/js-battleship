@@ -29,7 +29,7 @@ describe("Gameboard", () => {
     })
     it("marks cell if there was no ship", () => {
       gameboard.receiveAttack(2, 1)
-      expect(gameboard.board[1][2]).toBe('X')
+      expect(gameboard.history['2,1']).toBe(false)
     })
   })
   describe("allSunk() method", () => {

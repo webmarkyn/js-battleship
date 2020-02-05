@@ -1,121 +1,102 @@
+import Ship from "./ship";
+
 const containerAppend = obj => {
-    const container = document.getElementById('container');
+  const container = document.getElementById("container");
 
-    container.appendChild(obj);
-};
-
-const horizontalHead = () => {
-    const characters = ['A', 'B', 'C', 'D', 'E'];
-    const container = document.createElement('div');
-
-    container.classList.add('horizontal');
-
-    characters.forEach(character => {
-        const head = document.createElement('div');
-
-        head.innerText = character;
-        container.appendChild(head);
-    });
-
-    return container;
-};
-
-const verticalHead = () => {
-    const container = document.createElement('div');
-
-    container.classList.add('vertical');
-
-    for (let i = 1; i < 6; i++) {
-        const head = document.createElement('div');
-
-        head.innerText = i.toString();
-        container.appendChild(head);
-    }
-
-    return container;
-};
-
-const grid = () => {
-    const container = document.createElement('div');
-
-    container.classList.add('main');
-
-    for (let i = 1; i < 6; i++) {
-        for (let j = 1; j < 6; j++) {
-            const div = document.createElement('div');
-
-            container.appendChild(div);
-        }
-    }
-
-    return container;
+  container.appendChild(obj);
 };
 
 const renderControls = () => {
-    const container = document.createElement('div');
-    const orientationVertical = document.createElement('input');
-    const orientationHorizontal = document.createElement('input');
-    const labelVertical = document.createElement('label');
-    const labelHorizontal = document.createElement('label');
-    const ready = document.createElement('button');
+  const container = document.createElement("div");
+  const orientationVertical = document.createElement("input");
+  const orientationHorizontal = document.createElement("input");
+  const labelVertical = document.createElement("label");
+  const labelHorizontal = document.createElement("label");
+  const ready = document.createElement("button");
 
-    container.classList.add('controls');
+  container.classList.add("controls");
 
-    orientationVertical.setAttribute('type', 'radio');
-    orientationVertical.id = 'orientationVertical';
-    orientationVertical.name = 'orientation';
-    orientationVertical.checked = true;
-    labelVertical.setAttribute('for', 'orientationVertical');
-    labelVertical.innerText = 'vertical';
+  orientationVertical.setAttribute("type", "radio");
+  orientationVertical.id = "orientationVertical";
+  orientationVertical.name = "orientation";
+  orientationVertical.checked = true;
+  labelVertical.setAttribute("for", "orientationVertical");
+  labelVertical.innerText = "vertical";
 
-    orientationHorizontal.setAttribute('type', 'radio');
-    orientationHorizontal.id = 'orientationHorizontal';
-    orientationHorizontal.name = 'orientation';
-    labelHorizontal.setAttribute('for', 'orientationHorizontal');
-    labelHorizontal.innerText = 'Horizontal';
+  orientationHorizontal.setAttribute("type", "radio");
+  orientationHorizontal.id = "orientationHorizontal";
+  orientationHorizontal.name = "orientation";
+  labelHorizontal.setAttribute("for", "orientationHorizontal");
+  labelHorizontal.innerText = "Horizontal";
 
-    ready.innerText = 'Start Game';
+  ready.innerText = "Start Game";
 
-    container.appendChild(orientationVertical);
-    container.appendChild(labelVertical);
-    container.appendChild(orientationHorizontal);
-    container.appendChild(labelHorizontal);
-    container.appendChild(ready);
-    containerAppend(container);
+  container.appendChild(orientationVertical);
+  container.appendChild(labelVertical);
+  container.appendChild(orientationHorizontal);
+  container.appendChild(labelHorizontal);
+  container.appendChild(ready);
+  containerAppend(container);
 };
 
-const renderSelfBoard = () => {
-    const selfBoard = document.createElement('div');
-    const title = document.createElement('h2');
+const renderShips = shipsList => {
+  const ships = document.createElement("div");
+  ships.classList.add("ships");
 
-    selfBoard.id = 'selfBoard';
-    selfBoard.classList.add('self-board');
-    title.innerText = 'My Board';
+  for (let i=0;i<shipsList.length;i++) {
+    const domShip = document.createElement("div");
+    domShip.classList.add("ship");
+    domShip.dataset.id = i
+    for (let j=0;j<shipsList[i].length;j++) {
+      const shipsCell = document.createElement('div')
+      domShip.appendChild(shipsCell)
+    }
+    ships.appendChild(domShip)
+  }
 
-    selfBoard.appendChild(title);
-    selfBoard.appendChild(horizontalHead());
-    selfBoard.appendChild(verticalHead());
-    selfBoard.appendChild(grid());
-    containerAppend(selfBoard);
+  containerAppend(ships)
 };
 
-const renderEnemyBoard = () => {
-    const enemyBoard = document.createElement('div');
-    const title = document.createElement('h2');
-
-    enemyBoard.id = 'enemyBoard';
-    enemyBoard.classList.add('enemy-board');
-    title.innerText = 'My Board';
-
-    enemyBoard.appendChild(title);
-    enemyBoard.appendChild(horizontalHead());
-    enemyBoard.appendChild(verticalHead());
-    enemyBoard.appendChild(grid());
-    containerAppend(enemyBoard);
-};
-
-export {
-    renderSelfBoard,
-    renderEnemyBoard,
-    renderControls
+const moveToCursorPos = (element, event) => {
+  element.style.left = event.pageX - element.offsetWidth / 2 + 'px'
+  element.style.top = event.pageY - element.offsetHeight / 2 + 'px'
 }
+
+const renderBoard = (name, gameboard, self) => {
+  const board = gameboard.board;
+  const history = gameboard.history;
+  const domBoard = document.createElement("div");
+  const title = document.createElement("h2");
+  const boardGrid = document.createElement("div");
+  boardGrid.classList.add("board-grid");
+
+  boardGrid.id = `${name}Board`;
+  domBoard.classList.add(`board`);
+  title.innerText = `${name} Board`;
+  console.log(history);
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      const cell = board[i][j];
+      const domCell = document.createElement("div");
+      domCell.innerText = `${String.fromCharCode(65 + j)}${i}`;
+      if (`${j},${i}` in history) {
+        if (history[`${j},${i}`]) {
+          domCell.classList.add("damaged");
+          domCell.innerText = "💥";
+        } else {
+          domCell.classList.add("missed");
+          domCell.innerText = "🌊";
+        }
+      }
+      if (self && cell instanceof Ship) domCell.classList.add("ship");
+      domCell.classList.add("grid-cell");
+      domCell.dataset.coordinates = `${j} ${i}`;
+      boardGrid.appendChild(domCell);
+    }
+  }
+  domBoard.appendChild(title);
+  domBoard.appendChild(boardGrid);
+  containerAppend(domBoard);
+};
+
+export { renderBoard, renderControls, renderShips, moveToCursorPos };

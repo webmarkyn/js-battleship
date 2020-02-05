@@ -2,6 +2,7 @@ export default class Gameboard {
   constructor(params) {
     this.board = new Array(10).fill().map(u => new Array(10).fill());
     this.ships = []
+    this.history = {}
   }
 
   // This function puts reference to the Ship instance to array so when you
@@ -19,7 +20,7 @@ export default class Gameboard {
   receiveAttack(x, y) {
     const cell = this.board[y][x];
     if (!cell) {
-      this.board[y][x] = "X";
+      this.history[`${x},${y}`] = false
       return false;
     }
     // Because hit() takes index as an argument we must find what's cell's number for the ship
@@ -30,6 +31,7 @@ export default class Gameboard {
     const cellNum = x - startPos;
     // And then we call hit() method on that array index
     cell.hit(cellNum);
+    this.history[`${x},${y}`] = true
     return true;
   }
 
