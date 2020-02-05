@@ -16,6 +16,22 @@ export default class Gameboard {
     }
   }
 
+  checkValid(ship, x, y) {
+    const length = ship.length
+    if (this.board[y+1]) {
+      for (let i=x-1;i<=x+length;i++) {
+        if (this.board[y+1][i] !== undefined) return false
+      }
+    }
+    if (this.board[y-1]) {
+      for (let i=x-1;i<=x+length;i++) {
+        if (this.board[y-1][i] !== undefined) return false
+      }
+    }
+    if (this.board[y][x-1] !== undefined || this.board[y][x+1] !== undefined) return false
+    return true
+  }
+
   // This function invokes ship's hit() method based on given coordinates
   receiveAttack(x, y) {
     const cell = this.board[y][x];

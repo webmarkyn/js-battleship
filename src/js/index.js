@@ -5,7 +5,8 @@ import {
   renderControls,
   renderBoard,
   renderShips,
-  moveToCursorPos
+  moveToCursorPos,
+  updateBoard
 } from "./dom";
 import Player from "./player";
 
@@ -36,13 +37,14 @@ ships.forEach(ship => {
         shipTop < mainBoard.offsetTop + mainBoard.clientHeight
       ) {
         const id = ship.dataset.id
-        console.log(player.freeShips[id])
         const shipToPlace = player.freeShips[id]
         const x = Math.round((ship.offsetLeft - mainBoard.offsetLeft)/25)
         const y = Math.round((ship.offsetTop - mainBoard.offsetTop)/25)
         player.gameboard.placeShip(shipToPlace, x, y)
         player.removeShip(id)
-        renderBoard(player.name, player.gameboard, true)
+        mainBoard.innerHTML = updateBoard(mainBoard, player.gameboard.board, player.gameboard.history, true).innerHTML
+      
+        // renderBoard(player.name, player.gameboard, true)
         ship.outerHTML = ''
       } else {
         ship.style.position = "static";

@@ -62,6 +62,37 @@ const moveToCursorPos = (element, event) => {
   element.style.top = event.pageY - element.offsetHeight / 2 + 'px'
 }
 
+const createGridCell = ([i,j], history) => {
+  const gridCell = document.createElement("div");
+  gridCell.innerText = `${String.fromCharCode(65 + j)}${i}`
+  if (`${j},${i}` in history) {
+    if (history[`${j},${i}`]) {
+      gridCell.classList.add("damaged");
+      gridCell.innerText = "💥";
+    } else {
+      gridCell.classList.add("missed");
+      gridCell.innerText = "🌊";
+    }
+  }
+  gridCell.classList.add("grid-cell");
+  return gridCell
+}
+
+const updateBoard = (dom, board, history, self) => {
+  dom.innerHTML = ''
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      const cell = board[i][j];
+      const domCell = createGridCell([i,j], history)
+      console.log(self, cell);
+      if (self && cell instanceof Ship) domCell.classList.add("ship");
+      domCell.dataset.coordinates = `${j} ${i}`;
+      dom.appendChild(domCell);
+    }
+  }
+  return dom
+}
+
 const renderBoard = (name, gameboard, self) => {
   const board = gameboard.board;
   const history = gameboard.history;
@@ -69,34 +100,13 @@ const renderBoard = (name, gameboard, self) => {
   const title = document.createElement("h2");
   const boardGrid = document.createElement("div");
   boardGrid.classList.add("board-grid");
-
   boardGrid.id = `${name}Board`;
   domBoard.classList.add(`board`);
   title.innerText = `${name} Board`;
-  console.log(history);
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
-      const cell = board[i][j];
-      const domCell = document.createElement("div");
-      domCell.innerText = `${String.fromCharCode(65 + j)}${i}`;
-      if (`${j},${i}` in history) {
-        if (history[`${j},${i}`]) {
-          domCell.classList.add("damaged");
-          domCell.innerText = "💥";
-        } else {
-          domCell.classList.add("missed");
-          domCell.innerText = "🌊";
-        }
-      }
-      if (self && cell instanceof Ship) domCell.classList.add("ship");
-      domCell.classList.add("grid-cell");
-      domCell.dataset.coordinates = `${j} ${i}`;
-      boardGrid.appendChild(domCell);
-    }
-  }
+  boardGrid.innerHTML = updateBoard(boardGrid, board, history, self).innerHTML
   domBoard.appendChild(title);
   domBoard.appendChild(boardGrid);
   containerAppend(domBoard);
 };
 
-export { renderBoard, renderControls, renderShips, moveToCursorPos };
+export { renderBoard, renderControls, renderShips, moveToCursorPos, updateBoard };
