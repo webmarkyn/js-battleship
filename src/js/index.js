@@ -6,7 +6,7 @@ import Player from "./player";
 import ComputerPlayer from "./computerPlayer";
 import { addShipsDragnDrop } from "./events";
 
-const player = new Player("Mark");
+const player = new Player(prompt('Enter your name'));
 const computer = new ComputerPlayer();
 renderBoard(player.name, player.gameboard, true);
 renderShips(player.freeShips);
@@ -21,14 +21,24 @@ const startGame = () => {
     if (turn === player) {
       let [x, y] = e.target.dataset.coordinates.split(" ");
       computer.gameboard.receiveAttack(x, y);
+      // if (computer.gameboard.allSunk()) {
+      //   computerBoard.onclick = null;
+      //   alert('You Won!')
+      // }
+      console.log(player.gameboard.ships[0].isSunk())
+      console.log(computer.gameboard.allSunk());
       x = computer.getRandomNum(9);
       y = computer.getRandomNum(9);
       player.gameboard.receiveAttack(x, y);
+      // if (player.gameboard.allSunk()) {
+      //   computerBoard.onclick = null
+      //   alert('Computer Won!')
+      // }
       playerBoard.innerHTML = updateBoard(
         playerBoard,
         player.gameboard.board,
         player.gameboard.history,
-        false
+        true
       );
       computerBoard.innerHTML = updateBoard(
         computerBoard,
@@ -39,6 +49,7 @@ const startGame = () => {
     }
   };
 };
+// startGame()
 addShipsDragnDrop(ships, player, startGame);
 
 // TODO: computer player

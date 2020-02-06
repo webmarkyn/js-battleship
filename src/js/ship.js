@@ -11,7 +11,7 @@ export default class Ship {
 
   // will return true if all ship's cells are damaged
   isSunk() {
-    return this.damaged.every(el => true);
+    return this.damaged.every(el => el);
   }
 
   // Returns the length of the ship
