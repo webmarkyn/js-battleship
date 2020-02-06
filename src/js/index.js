@@ -11,7 +11,17 @@ import Player from "./player";
 import ComputerPlayer from './computerPlayer'
 import { addShipsDragnDrop } from './events'
 
+const player = new Player("Mark");
+const computer = new ComputerPlayer()
+renderBoard(player.name, player.gameboard, true);
+renderShips(player.freeShips);
+const ships = [...document.querySelectorAll(".ships .ship")];
+const startGame = () => {
+  computer.fillBoard()
+  renderBoard(computer.name, computer.gameboard, false)
+}
 
+addShipsDragnDrop(ships, player, startGame)
 
 
 
