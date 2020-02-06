@@ -6,38 +6,52 @@ import Player from "./player";
 import ComputerPlayer from "./computerPlayer";
 import { addShipsDragnDrop } from "./events";
 
+// Initialize varielble
 const player = new Player(prompt("Enter your name"));
 const computer = new ComputerPlayer();
 renderBoard(player.name, player.gameboard, true);
 renderShips(player.freeShips);
 const ships = [...document.querySelectorAll(".ships .ship")];
+
+// Starts when all ships are placed
 const startGame = () => {
+  // AI places ships on to the board
   computer.fillBoard();
   renderBoard(computer.name, computer.gameboard, false);
-  let turn = player;
   const playerBoard = document.getElementById(`${player.name}Board`);
   const computerBoard = document.getElementById(`${computer.name}Board`);
+
+  // Event listener for AI's board
   computerBoard.onclick = e => {
+    // If somehow clicked element wasn't a cell - exit
     if (!e.target.dataset.coordinates) return;
+    // Take coordinates from clicked cell
     let [x, y] = e.target.dataset.coordinates.split(" ");
+    // If attack was succesfull (cell hasn't been atacked before)
     if (computer.gameboard.receiveAttack(x, y)) {
-      console.log('hit');
+      // If AI has no living ships
       if (computer.gameboard.allSunk()) {
         computerBoard.onclick = null;
         alert("You Won!");
       }
+      // Get random coordinates
       x = computer.getRandomNum(9);
       y = computer.getRandomNum(9);
+      // Try to hit player's board
       let hit = player.gameboard.receiveAttack(x, y);
+      // If attack wasn't successfull (cell has been atacked before)
       while (!hit) {
+        // Try again until it works
         x = computer.getRandomNum(9);
         y = computer.getRandomNum(9);
         hit = player.gameboard.receiveAttack(x, y);
       }
+      // If players has no living ships
       if (player.gameboard.allSunk()) {
         computerBoard.onclick = null;
         alert("Computer Won!");
       }
+      // Update boards
       playerBoard.innerHTML = updateBoard(
         playerBoard,
         player.gameboard.board,
@@ -53,10 +67,6 @@ const startGame = () => {
     }
   };
 };
-// startGame()
 addShipsDragnDrop(ships, player, startGame);
 
-// TODO: computer player
-// TODO: idea: create predefined board templates for computer player
-// TODO: add player ships (3 ships for a 5 x 5 board)
-// TODO: winning method
+
