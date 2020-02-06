@@ -1,6 +1,4 @@
 import "../assets/sass/styles.scss";
-import Ship from "./ship";
-import Gameboard from "./gameboard";
 import { renderControls, renderBoard, renderShips, updateBoard } from "./dom";
 import Player from "./player";
 import ComputerPlayer from "./computerPlayer";
