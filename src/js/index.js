@@ -5,55 +5,16 @@ import {
   renderControls,
   renderBoard,
   renderShips,
-  moveToCursorPos,
   updateBoard
 } from "./dom";
 import Player from "./player";
+import ComputerPlayer from './computerPlayer'
+import { addShipsDragnDrop } from './events'
 
-const player = new Player("Mark");
-renderBoard(player.name, player.gameboard, true);
-const mainBoard = document.getElementById(`${player.name}Board`);
-console.log(mainBoard);
-renderShips(player.freeShips);
 
-const ships = [...document.querySelectorAll(".ships .ship")];
 
-ships.forEach(ship => {
-  ship.addEventListener("mousedown", e => {
-    ship.style.position = "absolute";
 
-    document.onmousemove = e => {
-      moveToCursorPos(ship, e);
-    };
 
-    ship.onmouseup = e => {
-      const shipLeft = ship.offsetLeft + ship.clientWidth - 15;
-      const shipTop = ship.offsetTop + ship.clientHeight - 15;
-      // console.log(shipLeft, shipRight)
-      if (
-        shipLeft > mainBoard.offsetLeft &&
-        shipLeft < mainBoard.offsetLeft + mainBoard.clientWidth &&
-        shipTop > mainBoard.offsetTop &&
-        shipTop < mainBoard.offsetTop + mainBoard.clientHeight
-      ) {
-        const id = ship.dataset.id
-        const shipToPlace = player.freeShips[id]
-        const x = Math.round((ship.offsetLeft - mainBoard.offsetLeft)/25)
-        const y = Math.round((ship.offsetTop - mainBoard.offsetTop)/25)
-        player.gameboard.placeShip(shipToPlace, x, y)
-        player.removeShip(id)
-        mainBoard.innerHTML = updateBoard(mainBoard, player.gameboard.board, player.gameboard.history, true).innerHTML
-      
-        // renderBoard(player.name, player.gameboard, true)
-        ship.outerHTML = ''
-      } else {
-        ship.style.position = "static";
-      }
-      document.onmousemove = null;
-      ship.onmouseup = null;
-    };
-  });
-});
 
 // TODO: computer player
 // TODO: idea: create predefined board templates for computer player

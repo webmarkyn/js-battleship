@@ -1,42 +1,51 @@
 export default class Gameboard {
   constructor(params) {
     this.board = new Array(10).fill().map(u => new Array(10).fill());
-    this.ships = []
-    this.history = {}
+    this.ships = [];
+    this.history = {};
   }
 
   // This function puts reference to the Ship instance to array so when you
   // call ship methods on the board cell,
   // were the ship is placed, it gets called directly on class instance
+  checkValid(ship, x, y) {
+    const length = ship.length;
+    for (let i=0;i<ship.length;i++) {
+      if (this.board[y][x+i] !== undefined) return false;
+    }
+    if (this.board[y + 1]) {
+      for (let i = x - 1; i <= x + length; i++) {
+        if (this.board[y + 1][i] !== undefined) return false;
+      }
+    }
+    if (this.board[y - 1]) {
+      for (let i = x - 1; i <= x + length; i++) {
+        if (this.board[y - 1][i] !== undefined) return false;
+      }
+    }
+    if (
+      this.board[y][x - 1] !== undefined ||
+      this.board[y][x + length] !== undefined
+    ) {
+      return false;
+    }
+    return true;
+  }
+
   placeShip(ship, x, y) {
-    if (this.board[y][x] !== undefined || this.ships.includes(ship)) return false
-    this.ships.push(ship)
+    if (!this.checkValid(ship, x, y)) return false;
+    this.ships.push(ship);
     for (let i = 0; i < ship.length; i++) {
       this.board[y][x + i] = ship;
     }
-  }
-
-  checkValid(ship, x, y) {
-    const length = ship.length
-    if (this.board[y+1]) {
-      for (let i=x-1;i<=x+length;i++) {
-        if (this.board[y+1][i] !== undefined) return false
-      }
-    }
-    if (this.board[y-1]) {
-      for (let i=x-1;i<=x+length;i++) {
-        if (this.board[y-1][i] !== undefined) return false
-      }
-    }
-    if (this.board[y][x-1] !== undefined || this.board[y][x+1] !== undefined) return false
-    return true
+    return true;
   }
 
   // This function invokes ship's hit() method based on given coordinates
   receiveAttack(x, y) {
     const cell = this.board[y][x];
     if (!cell) {
-      this.history[`${x},${y}`] = false
+      this.history[`${x},${y}`] = false;
       return false;
     }
     // Because hit() takes index as an argument we must find what's cell's number for the ship
@@ -47,12 +56,12 @@ export default class Gameboard {
     const cellNum = x - startPos;
     // And then we call hit() method on that array index
     cell.hit(cellNum);
-    this.history[`${x},${y}`] = true
+    this.history[`${x},${y}`] = true;
     return true;
   }
 
   allSunk() {
-    if (this.ships.length === 0) return false
-    return this.ships.every(ship => ship.isSunk())
+    if (this.ships.length === 0) return false;
+    return this.ships.every(ship => ship.isSunk());
   }
 }

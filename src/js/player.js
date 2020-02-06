@@ -19,7 +19,16 @@ export default class Player {
     ];
   }
 
-  removeShip(id) {
-    this.freeShips.splice(id, 1)
+  findShipByLength(len) {
+    return this.freeShips.filter(ship => ship.length == len)[0]
   }
+
+  removeShip(ship) {
+    this.freeShips.splice(this.freeShips.indexOf(ship), 1)
+  }
+
+  getLastShip() {
+    return this.freeShips[this.freeShips.length-1]
+  }
+
 }

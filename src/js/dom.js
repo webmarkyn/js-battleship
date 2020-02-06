@@ -47,6 +47,7 @@ const renderShips = shipsList => {
     const domShip = document.createElement("div");
     domShip.classList.add("ship");
     domShip.dataset.id = i
+    domShip.dataset.length = shipsList[i].length
     for (let j=0;j<shipsList[i].length;j++) {
       const shipsCell = document.createElement('div')
       domShip.appendChild(shipsCell)
@@ -84,7 +85,6 @@ const updateBoard = (dom, board, history, self) => {
     for (let j = 0; j < board[i].length; j++) {
       const cell = board[i][j];
       const domCell = createGridCell([i,j], history)
-      console.log(self, cell);
       if (self && cell instanceof Ship) domCell.classList.add("ship");
       domCell.dataset.coordinates = `${j} ${i}`;
       dom.appendChild(domCell);
