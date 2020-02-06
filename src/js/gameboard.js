@@ -44,9 +44,10 @@ export default class Gameboard {
   // This function invokes ship's hit() method based on given coordinates
   receiveAttack(x, y) {
     const cell = this.board[y][x];
+    if (this.history[`${x},${y}`] !== undefined) return false
     if (!cell) {
       this.history[`${x},${y}`] = false;
-      return false;
+      return true;
     }
     // Because hit() takes index as an argument we must find what's cell's number for the ship
     // So we find the index first appearance of this ship in a row

@@ -6,7 +6,7 @@ import Player from "./player";
 import ComputerPlayer from "./computerPlayer";
 import { addShipsDragnDrop } from "./events";
 
-const player = new Player(prompt('Enter your name'));
+const player = new Player(prompt("Enter your name"));
 const computer = new ComputerPlayer();
 renderBoard(player.name, player.gameboard, true);
 renderShips(player.freeShips);
@@ -18,22 +18,26 @@ const startGame = () => {
   const playerBoard = document.getElementById(`${player.name}Board`);
   const computerBoard = document.getElementById(`${computer.name}Board`);
   computerBoard.onclick = e => {
-    if (turn === player) {
-      let [x, y] = e.target.dataset.coordinates.split(" ");
-      computer.gameboard.receiveAttack(x, y);
-      // if (computer.gameboard.allSunk()) {
-      //   computerBoard.onclick = null;
-      //   alert('You Won!')
-      // }
-      console.log(player.gameboard.ships[0].isSunk())
-      console.log(computer.gameboard.allSunk());
+    if (!e.target.dataset.coordinates) return;
+    let [x, y] = e.target.dataset.coordinates.split(" ");
+    if (computer.gameboard.receiveAttack(x, y)) {
+      console.log('hit');
+      if (computer.gameboard.allSunk()) {
+        computerBoard.onclick = null;
+        alert("You Won!");
+      }
       x = computer.getRandomNum(9);
       y = computer.getRandomNum(9);
-      player.gameboard.receiveAttack(x, y);
-      // if (player.gameboard.allSunk()) {
-      //   computerBoard.onclick = null
-      //   alert('Computer Won!')
-      // }
+      let hit = player.gameboard.receiveAttack(x, y);
+      while (!hit) {
+        x = computer.getRandomNum(9);
+        y = computer.getRandomNum(9);
+        hit = player.gameboard.receiveAttack(x, y);
+      }
+      if (player.gameboard.allSunk()) {
+        computerBoard.onclick = null;
+        alert("Computer Won!");
+      }
       playerBoard.innerHTML = updateBoard(
         playerBoard,
         player.gameboard.board,
