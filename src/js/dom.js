@@ -90,7 +90,7 @@ const updateBoard = (dom, board, history, self) => {
       dom.appendChild(domCell);
     }
   }
-  return dom
+  return dom.innerHTML
 }
 
 const renderBoard = (name, gameboard, self) => {
@@ -103,7 +103,7 @@ const renderBoard = (name, gameboard, self) => {
   boardGrid.id = `${name}Board`;
   domBoard.classList.add(`board`);
   title.innerText = `${name} Board`;
-  boardGrid.innerHTML = updateBoard(boardGrid, board, history, self).innerHTML
+  boardGrid.innerHTML = updateBoard(boardGrid, board, history, self)
   domBoard.appendChild(title);
   domBoard.appendChild(boardGrid);
   containerAppend(domBoard);

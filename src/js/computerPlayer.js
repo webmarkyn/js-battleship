@@ -9,6 +9,10 @@ export default class ComputerPlayer extends Player {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
+  getRandomCoords(max) {
+    return [this.getRandomNum(max), this.getRandomNum(max)]
+  }
+
   fillBoard() {
     while (this.freeShips.length > 0) {
       const ship = this.freeShips[0]

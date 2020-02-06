@@ -19,9 +19,10 @@ const addShipsDragnDrop = (ships, player, callback) => {
           shipTop > mainBoard.offsetTop &&
           shipTop < mainBoard.offsetTop + mainBoard.clientHeight
         ) {
+          const cellWidth = mainBoard.clientWidth / 10
           const shipToPlace = player.findShipByLength(ship.dataset.length);
-          const x = Math.round((ship.offsetLeft - mainBoard.offsetLeft) / 25);
-          const y = Math.round((ship.offsetTop - mainBoard.offsetTop) / 25);
+          const x = Math.round((ship.offsetLeft - mainBoard.offsetLeft) / cellWidth);
+          const y = Math.round((ship.offsetTop - mainBoard.offsetTop) / cellWidth);
           if (player.gameboard.placeShip(shipToPlace, x, y)) {
             player.removeShip(shipToPlace);
             mainBoard.innerHTML = updateBoard(
@@ -29,7 +30,7 @@ const addShipsDragnDrop = (ships, player, callback) => {
               player.gameboard.board,
               player.gameboard.history,
               true
-            ).innerHTML;
+            );
             ship.outerHTML = "";
           } else ship.style.position = "static";
         } else {
