@@ -13,8 +13,9 @@ const ships = [...document.querySelectorAll(".ships .ship")];
 
 // Starts when all ships are placed
 const startGame = () => {
-  // AI places ships on to the board
+  // ships container will be removed
   removeShipsContainer();
+  // AI places ships on to the board
   computer.fillBoard();
   renderBoard(computer.name, computer.gameboard, false);
   const playerBoard = document.getElementById(`${player.name}Board`);
