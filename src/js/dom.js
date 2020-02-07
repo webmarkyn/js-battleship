@@ -42,6 +42,7 @@ const renderControls = () => {
 const renderShips = shipsList => {
   const ships = document.createElement("div");
   ships.classList.add("ships");
+  ships.id = 'shipsContainer';
 
   for (let i=0;i<shipsList.length;i++) {
     const domShip = document.createElement("div");
@@ -61,7 +62,12 @@ const renderShips = shipsList => {
 const moveToCursorPos = (element, event) => {
   element.style.left = event.pageX - element.offsetWidth / 2 + 'px'
   element.style.top = event.pageY - element.offsetHeight / 2 + 'px'
-}
+};
+
+const removeShipsContainer = () => {
+  const ships = document.getElementById('shipsContainer');
+  ships.parentElement.removeChild(ships);
+};
 
 const createGridCell = ([i,j], history) => {
   const gridCell = document.createElement("div");
@@ -109,4 +115,4 @@ const renderBoard = (name, gameboard, self) => {
   containerAppend(domBoard);
 };
 
-export { renderBoard, renderControls, renderShips, moveToCursorPos, updateBoard };
+export { renderBoard, renderControls, renderShips, moveToCursorPos, updateBoard, removeShipsContainer };

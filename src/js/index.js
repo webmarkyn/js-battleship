@@ -1,11 +1,11 @@
 import "../assets/sass/styles.scss";
-import { renderControls, renderBoard, renderShips, updateBoard } from "./dom";
+import { renderControls, renderBoard, renderShips, updateBoard, removeShipsContainer } from './dom';
 import Player from "./player";
 import ComputerPlayer from "./computerPlayer";
 import { addShipsDragnDrop } from "./events";
 
 // Initialize varielble
-const player = new Player(prompt("Enter your name"));
+const player = new Player('Player');
 const computer = new ComputerPlayer();
 renderBoard(player.name, player.gameboard, true);
 renderShips(player.freeShips);
@@ -14,6 +14,7 @@ const ships = [...document.querySelectorAll(".ships .ship")];
 // Starts when all ships are placed
 const startGame = () => {
   // AI places ships on to the board
+  removeShipsContainer();
   computer.fillBoard();
   renderBoard(computer.name, computer.gameboard, false);
   const playerBoard = document.getElementById(`${player.name}Board`);
