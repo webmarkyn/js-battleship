@@ -1,6 +1,6 @@
 export default class Gameboard {
-  constructor(params) {
-    this.board = new Array(10).fill().map(u => new Array(10).fill());
+  constructor() {
+    this.board = new Array(10).fill().map(() => new Array(10).fill());
     this.ships = [];
     this.history = {};
   }
@@ -10,16 +10,16 @@ export default class Gameboard {
   // were the ship is placed, it gets called directly on class instance
   checkValid(ship, x, y) {
     const { length } = ship;
-    for (let i = 0; i < ship.length; i++) {
+    for (let i = 0; i < ship.length; i += 1) {
       if (this.board[y][x + i] !== undefined) return false;
     }
     if (this.board[y + 1]) {
-      for (let i = x - 1; i <= x + length; i++) {
+      for (let i = x - 1; i <= x + length; i += 1) {
         if (this.board[y + 1][i] !== undefined) return false;
       }
     }
     if (this.board[y - 1]) {
-      for (let i = x - 1; i <= x + length; i++) {
+      for (let i = x - 1; i <= x + length; i += 1) {
         if (this.board[y - 1][i] !== undefined) return false;
       }
     }
@@ -35,7 +35,7 @@ export default class Gameboard {
   placeShip(ship, x, y) {
     if (!this.checkValid(ship, x, y)) return false;
     this.ships.push(ship);
-    for (let i = 0; i < ship.length; i++) {
+    for (let i = 0; i < ship.length; i += 1) {
       this.board[y][x + i] = ship;
     }
     return true;
