@@ -5,6 +5,7 @@ import {
 import Player from './player';
 import ComputerPlayer from './computerPlayer';
 import addShipsDragnDrop from './events';
+import getRandomNum from './helper';
 
 // Initialize varielble
 const player = new Player('Player');
@@ -37,15 +38,15 @@ const startGame = () => {
         alert('You Won!');
       }
       // Get random coordinates
-      x = computer.getRandomNum(10);
-      y = computer.getRandomNum(10);
+      x = getRandomNum(10);
+      y = getRandomNum(10);
       // Try to hit player's board
       let hit = player.gameboard.receiveAttack(x, y);
       // If attack wasn't successfull (cell has been atacked before)
       while (!hit) {
         // Try again until it works
-        x = computer.getRandomNum(10);
-        y = computer.getRandomNum(10);
+        x = getRandomNum(10);
+        y = getRandomNum(10);
         hit = player.gameboard.receiveAttack(x, y);
       }
       // If players has no living ships
