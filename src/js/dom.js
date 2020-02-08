@@ -11,12 +11,12 @@ const renderShips = shipsList => {
   ships.classList.add('ships');
   ships.id = 'shipsContainer';
 
-  for (let i = 0; i < shipsList.length; i++) {
+  for (let i = 0; i < shipsList.length; i += 1) {
     const domShip = document.createElement('div');
     domShip.classList.add('ship');
     domShip.dataset.id = i;
     domShip.dataset.length = shipsList[i].length;
-    for (let j = 0; j < shipsList[i].length; j++) {
+    for (let j = 0; j < shipsList[i].length; j += 1) {
       const shipsCell = document.createElement('div');
       domShip.appendChild(shipsCell);
     }
@@ -54,8 +54,8 @@ const createGridCell = ([i, j], history) => {
 
 const updateBoard = (dom, board, history, self) => {
   dom.innerHTML = '';
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
+  for (let i = 0; i < board.length; i += 1) {
+    for (let j = 0; j < board[i].length; j += 1) {
       const cell = board[i][j];
       const domCell = createGridCell([i, j], history);
       if (self && cell instanceof Ship) domCell.classList.add('ship');
