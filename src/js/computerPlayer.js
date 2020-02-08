@@ -6,7 +6,7 @@ export default class ComputerPlayer extends Player {
   }
 
   getRandomNum(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+    return this.Math.floor(Math.random() * Math.floor(max));
   }
 
   getRandomCoords(max) {
@@ -21,14 +21,14 @@ export default class ComputerPlayer extends Player {
       let y = this.getRandomNum(9);
       this.freeShips.shift();
       let ret = this.gameboard.placeShip(ship, x, y);
-      let sub_c = 0;
-      while (!ret && sub_c < 200) {
+      let subC = 0;
+      while (!ret && subC < 200) {
         x = this.getRandomNum(max);
         y = this.getRandomNum(9);
         ret = this.gameboard.placeShip(ship, x, y);
-        sub_c++;
+        subC += 1;
       }
-      if (sub_c >= 200) {
+      if (subC >= 200) {
         alert('Error ocured please reload the page');
       }
     }
