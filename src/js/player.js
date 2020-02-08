@@ -20,7 +20,7 @@ export default class Player {
   }
 
   findShipByLength(len) {
-    return this.freeShips.filter(ship => parseInt(ship.length) === parseInt(len))[0];
+    return this.freeShips.filter(ship => ship.length.toString() === len.toString())[0];
   }
 
   removeShip(ship) {
