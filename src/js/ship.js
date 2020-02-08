@@ -1,6 +1,6 @@
 export default class Ship {
   constructor(len) {
-    this._length = len;
+    this.size = len;
     this.damaged = new Array(len).fill(false);
   }
 
@@ -16,6 +16,6 @@ export default class Ship {
 
   // Returns the length of the ship
   get length() {
-    return this._length;
+    return this.size;
   }
 }
