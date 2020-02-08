@@ -1,6 +1,6 @@
 import '../assets/sass/styles.scss';
 import {
-  renderControls, renderBoard, renderShips, updateBoard, removeShipsContainer,
+  renderBoard, renderShips, updateBoard, removeShipsContainer,
 } from './dom';
 import Player from './player';
 import ComputerPlayer from './computerPlayer';
