@@ -1,6 +1,6 @@
 import '../assets/sass/styles.scss';
 import {
-  renderBoard, renderShips, updateBoard, removeShipsContainer,
+  renderBoard, renderShips, updateBoard, removeShipsContainer, setTitle,
 } from './dom';
 import Player from './player';
 import ComputerPlayer from './computerPlayer';
@@ -35,7 +35,7 @@ const startGame = () => {
       // If AI has no living ships
       if (computer.gameboard.allSunk()) {
         computerBoard.onclick = null;
-        alert('You Won!');
+        setTitle('You Won!');
       }
       // Get random coordinates
       x = getRandomNum(10);
@@ -52,7 +52,7 @@ const startGame = () => {
       // If players has no living ships
       if (player.gameboard.allSunk()) {
         computerBoard.onclick = null;
-        alert('Computer Won!');
+        setTitle('Computer Won!');
       }
       // Update boards
       playerBoard.innerHTML = updateBoard(

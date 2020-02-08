@@ -1,5 +1,10 @@
 import Ship from './ship';
 
+const setTitle = text => {
+  const title = document.getElementById('title');
+  title.innerText = text;
+};
+
 const containerAppend = obj => {
   const container = document.getElementById('container');
 
@@ -83,5 +88,5 @@ const renderBoard = (name, gameboard, self) => {
 };
 
 export {
-  renderBoard, renderShips, moveToCursorPos, updateBoard, removeShipsContainer,
+  renderBoard, renderShips, moveToCursorPos, updateBoard, removeShipsContainer, setTitle,
 };

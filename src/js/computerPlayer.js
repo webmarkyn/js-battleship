@@ -1,5 +1,6 @@
 import Player from './player';
 import getRandomNum from './helper';
+import { setTitle } from './dom';
 
 export default class ComputerPlayer extends Player {
   constructor() {
@@ -22,7 +23,7 @@ export default class ComputerPlayer extends Player {
         subC += 1;
       }
       if (subC >= 200) {
-        alert('Error ocured please reload the page');
+        setTitle('Error ocured please reload the page');
       }
     }
   }
