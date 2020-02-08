@@ -1,5 +1,5 @@
-import Gameboard from "./gameboard";
-import Ship from "./ship";
+import Gameboard from './gameboard';
+import Ship from './ship';
 
 export default class Player {
   constructor(name) {
@@ -20,15 +20,14 @@ export default class Player {
   }
 
   findShipByLength(len) {
-    return this.freeShips.filter(ship => ship.length == len)[0]
+    return this.freeShips.filter(ship => ship.length == len)[0];
   }
 
   removeShip(ship) {
-    this.freeShips.splice(this.freeShips.indexOf(ship), 1)
+    this.freeShips.splice(this.freeShips.indexOf(ship), 1);
   }
 
   getLastShip() {
-    return this.freeShips[this.freeShips.length-1]
+    return this.freeShips[this.freeShips.length - 1];
   }
-
 }

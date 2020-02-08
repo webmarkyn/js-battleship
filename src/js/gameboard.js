@@ -9,9 +9,9 @@ export default class Gameboard {
   // call ship methods on the board cell,
   // were the ship is placed, it gets called directly on class instance
   checkValid(ship, x, y) {
-    const length = ship.length;
-    for (let i=0;i<ship.length;i++) {
-      if (this.board[y][x+i] !== undefined) return false;
+    const { length } = ship;
+    for (let i = 0; i < ship.length; i++) {
+      if (this.board[y][x + i] !== undefined) return false;
     }
     if (this.board[y + 1]) {
       for (let i = x - 1; i <= x + length; i++) {
@@ -24,8 +24,8 @@ export default class Gameboard {
       }
     }
     if (
-      this.board[y][x - 1] !== undefined ||
-      this.board[y][x + length] !== undefined
+      this.board[y][x - 1] !== undefined
+      || this.board[y][x + length] !== undefined
     ) {
       return false;
     }
@@ -44,7 +44,7 @@ export default class Gameboard {
   // This function invokes ship's hit() method based on given coordinates
   receiveAttack(x, y) {
     const cell = this.board[y][x];
-    if (this.history[`${x},${y}`] !== undefined) return false
+    if (this.history[`${x},${y}`] !== undefined) return false;
     if (!cell) {
       this.history[`${x},${y}`] = false;
       return true;

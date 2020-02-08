@@ -1,10 +1,10 @@
-import { moveToCursorPos, updateBoard } from "./dom";
+import { moveToCursorPos, updateBoard } from './dom';
 
 const addShipsDragnDrop = (ships, player, callback) => {
   const mainBoard = document.getElementById(`${player.name}Board`);
   ships.forEach(ship => {
-    ship.addEventListener("mousedown", e => {
-      ship.style.position = "absolute";
+    ship.addEventListener('mousedown', e => {
+      ship.style.position = 'absolute';
 
       document.onmousemove = e => {
         moveToCursorPos(ship, e);
@@ -14,12 +14,12 @@ const addShipsDragnDrop = (ships, player, callback) => {
         const shipLeft = ship.offsetLeft + ship.clientWidth - 15;
         const shipTop = ship.offsetTop + ship.clientHeight - 15;
         if (
-          shipLeft > mainBoard.offsetLeft &&
-          shipLeft < mainBoard.offsetLeft + mainBoard.clientWidth &&
-          shipTop > mainBoard.offsetTop &&
-          shipTop < mainBoard.offsetTop + mainBoard.clientHeight
+          shipLeft > mainBoard.offsetLeft
+          && shipLeft < mainBoard.offsetLeft + mainBoard.clientWidth
+          && shipTop > mainBoard.offsetTop
+          && shipTop < mainBoard.offsetTop + mainBoard.clientHeight
         ) {
-          const cellWidth = mainBoard.clientWidth / 10
+          const cellWidth = mainBoard.clientWidth / 10;
           const shipToPlace = player.findShipByLength(ship.dataset.length);
           const x = Math.round((ship.offsetLeft - mainBoard.offsetLeft) / cellWidth);
           const y = Math.round((ship.offsetTop - mainBoard.offsetTop) / cellWidth);
@@ -29,17 +29,17 @@ const addShipsDragnDrop = (ships, player, callback) => {
               mainBoard,
               player.gameboard.board,
               player.gameboard.history,
-              true
+              true,
             );
-            ship.outerHTML = "";
-          } else ship.style.position = "static";
+            ship.outerHTML = '';
+          } else ship.style.position = 'static';
         } else {
-          ship.style.position = "static";
+          ship.style.position = 'static';
         }
         document.onmousemove = null;
         ship.onmouseup = null;
         if (player.freeShips.length === 0) {
-          callback()
+          callback();
         }
       };
     });
