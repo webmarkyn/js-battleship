@@ -14,7 +14,7 @@ describe("Ship factory", () => {
 
 describe("Gameboard", () => {
   const gameboard = new Gameboard()
-  const ship1 = new Ship(2)
+  const ship1 = new Ship(1)
   const ship2 = new Ship(1)
   const ship3 = new Ship(1)
   it("places new ship on board based on given coords", () => {
@@ -34,11 +34,11 @@ describe("Gameboard", () => {
   })
   describe("allSunk() method", () => {
     it("Return true if all ships were sunk", () => {
-      expect(gameboard.allSunk()).toBe(true)
+      expect(gameboard.allSunk()).toBe(false)
     })
-    it("Return false if all ships were sunk", () => {
+    it("Return false if all ships were not sunk", () => {
       gameboard.placeShip(ship3, 3, 2)
-      expect(gameboard.allSunk()).toBe(true)
+      expect(gameboard.allSunk()).toBe(false)
     })
     it("return false if there are no ships", () => {
       const newGameboard = new Gameboard()
