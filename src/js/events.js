@@ -1,16 +1,16 @@
 import { moveToCursorPos, updateBoard } from './dom';
 
-const addShipsDragnDrop = (ships, player, callback) => {
+export default function addShipsDragnDrop(ships, player, callback) {
   const mainBoard = document.getElementById(`${player.name}Board`);
   ships.forEach(ship => {
-    ship.addEventListener('mousedown', e => {
+    ship.addEventListener('mousedown', () => {
       ship.style.position = 'absolute';
 
       document.onmousemove = e => {
         moveToCursorPos(ship, e);
       };
 
-      ship.onmouseup = e => {
+      ship.onmouseup = () => {
         const shipLeft = ship.offsetLeft + ship.clientWidth - 15;
         const shipTop = ship.offsetTop + ship.clientHeight - 15;
         if (
@@ -44,6 +44,4 @@ const addShipsDragnDrop = (ships, player, callback) => {
       };
     });
   });
-};
-
-export { addShipsDragnDrop };
+}

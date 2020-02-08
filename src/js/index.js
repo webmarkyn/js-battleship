@@ -4,7 +4,7 @@ import {
 } from './dom';
 import Player from './player';
 import ComputerPlayer from './computerPlayer';
-import { addShipsDragnDrop } from './events';
+import addShipsDragnDrop from './events';
 
 // Initialize varielble
 const player = new Player('Player');
