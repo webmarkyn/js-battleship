@@ -4,10 +4,10 @@ module.exports = {
   entry: './src/js/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js'
+    filename: 'main.js',
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist')
+    contentBase: path.join(__dirname, 'dist'),
   },
   module: {
     rules: [
@@ -17,8 +17,8 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        use: ['file-loader']
-      }
-    ]
-  }
+        use: ['file-loader'],
+      },
+    ],
+  },
 };
