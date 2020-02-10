@@ -10,6 +10,7 @@ export default class Gameboard {
   // were the ship is placed, it gets called directly on class instance
   checkValid(ship, x, y) {
     const { length } = ship;
+    if (x < 0 || y < 0) return false;
     for (let i = 0; i < ship.length; i += 1) {
       if (this.board[y][x + i] !== undefined) return false;
     }
