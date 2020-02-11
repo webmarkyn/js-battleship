@@ -1,5 +1,5 @@
 dist/main.js
-
+settings.json
 
 # Logs
 logs
@@ -104,3 +104,4 @@ typings/
 
 # TernJS port file
 .tern-port
+.idea
