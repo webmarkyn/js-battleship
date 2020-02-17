@@ -13,9 +13,11 @@ const computer = new ComputerPlayer();
 renderBoard(player.name, player.gameboard, true);
 renderShips(player.freeShips);
 const ships = [...document.querySelectorAll('.ships .ship')];
+setTitle('Drag and drop ships onto the Board');
 
 // Starts when all ships are placed
 const startGame = () => {
+  setTitle('You are playing agains AI');
   // ships container will be removed
   removeShipsContainer();
   // AI places ships on to the board
