@@ -1,7 +1,6 @@
 # The Battleship Game
 
-> The goal of this project is to recreate the classic game Battleship as a microverse
->project from javascript section 
+> The goal of this project is to recreate the classic game Battleship as a Microverse project from the Javascript section
 
 ## Built With
 
