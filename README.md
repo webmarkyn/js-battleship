@@ -2,6 +2,8 @@
 
 > The goal of this project is to recreate the classic game Battleship as a Microverse project from the Javascript section
 
+![screenshot](./screenshot.png)
+
 ## Built With
 
 - JavaScript, HTML, CSS
