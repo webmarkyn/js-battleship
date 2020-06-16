@@ -30,6 +30,12 @@
 - Twitter: [@oscardelalanza](https://twitter.com/oscardelalanza)
 - Linkedin: [Oscar De La Lanza](https://linkedin.com/in/oscardelalanza)
 
+## Future updates  
+
+- Improve UI
+- Add multiplayer
+- Optimize code
+
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
